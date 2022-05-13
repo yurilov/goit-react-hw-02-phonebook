@@ -2,6 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import ContactForm from './ContactForm/ContactForm';
+import ContactsList from './ContactsList/ContactsList';
 
 class App extends Component {
   state = {
@@ -49,7 +50,7 @@ class App extends Component {
 
   render() {
     // const { filter } = this.state;
-    // const contacts = this.getContacts();
+    const contacts = this.getContacts();
 
     return (
       <>
@@ -57,6 +58,7 @@ class App extends Component {
           onAdd={this.handleContactAdd}
           checkUnique={this.checkIfContactIsUnique}
         />
+        <ContactsList contacts={contacts} onRemove={this.handleContactRemove} />
       </>
     );
   }
