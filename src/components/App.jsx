@@ -1,8 +1,10 @@
 import './App.css';
 import React, { Component } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import Section from './Section/Section';
 import ContactForm from './ContactForm/ContactForm';
 import ContactsList from './ContactsList/ContactsList';
+import Filter from './Filter/Filter';
 
 class App extends Component {
   state = {
@@ -49,16 +51,28 @@ class App extends Component {
   };
 
   render() {
-    // const { filter } = this.state;
+    const { filter } = this.state;
     const contacts = this.getContacts();
 
     return (
       <>
-        <ContactForm
-          onAdd={this.handleContactAdd}
-          checkUnique={this.checkIfContactIsUnique}
-        />
-        <ContactsList contacts={contacts} onRemove={this.handleContactRemove} />
+        <Section title="Phonebook">
+          <ContactForm
+            onAdd={this.handleContactAdd}
+            checkUnique={this.checkIfContactIsUnique}
+            />
+        </Section>
+        <Section title="Contacts">
+          <Filter
+            filter={filter}
+            onChange={this.handleFilterChange}
+            title="Find contacts by name"
+          />
+          <ContactsList
+            contacts={contacts}
+            onRemove={this.handleContactRemove}
+            />
+        </Section>
       </>
     );
   }
