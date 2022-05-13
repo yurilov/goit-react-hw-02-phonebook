@@ -48,8 +48,8 @@ class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
-    const contacts = this.getContacts();
+    // const { filter } = this.state;
+    // const contacts = this.getContacts();
 
     return (
       <>
