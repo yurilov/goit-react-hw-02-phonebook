@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import ContactForm from './ContactForm/ContactForm';
 
 class App extends Component {
   state = {
@@ -13,12 +14,49 @@ class App extends Component {
     filter: '',
   };
 
+  handleContactAdd = newContact =>
+    this.setState(
+      ({ contacts }) => ({
+        contacts: [...contacts, newContact],
+      }),
+      Notify.success('Contact is added to phonebook')
+    );
+
+  checkIfContactIsUnique = name => {
+    const { contacts } = this.state;
+    const contactExcists = contacts.find(contact => contact.name === name);
+    contactExcists && Notify.failure('Contact is already in a phonebook');
+
+    return !contactExcists;
+  };
+
+  handleContactRemove = id =>
+    this.setState(
+      ({ contacts }) => ({
+        contacts: contacts.filter(contact => contact.id !== id),
+      }),
+      Notify.success('Contact is deleted')
+    );
+
+  handleFilterChange = filter => this.setState({ filter });
+
+  getContacts = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   render() {
-    // const { filter } = this.state;
+    const { filter } = this.state;
+    const contacts = this.getContacts();
 
     return (
       <>
-        <div>wtf</div>
+        <ContactForm
+          onAdd={this.handleContactAdd}
+          checkUnique={this.checkIfContactIsUnique}
+        />
       </>
     );
   }
