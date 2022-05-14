@@ -34,13 +34,14 @@ ContactsListItem.propTypes = {
   number: propTypes.string.isRequired,
   onRemove: propTypes.func,
 };
+
 ContactsList.propTypes = {
   contacts: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.string.isRequired,
     })
   ),
-  onRemove: propTypes.func,
+  onRemove: propTypes.func.isRequired,
 };
 
 export default ContactsList;

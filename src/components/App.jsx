@@ -1,4 +1,3 @@
-import './App.css';
 import React, { Component } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Section from './Section/Section';
