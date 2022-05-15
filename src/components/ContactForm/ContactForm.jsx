@@ -10,6 +10,11 @@ const INITIAL_STATE = {
 };
 
 class ContactForm extends Component {
+  static propTypes = {
+     checkUnique: propTypes.func.isRequired,
+      onAdd: propTypes.func.isRequired,
+   };
+
   state = INITIAL_STATE;
 
   handleFormChange = ({ target }) => {
@@ -80,10 +85,5 @@ class ContactForm extends Component {
     );
   }
 }
-
-ContactForm.propTypes = {
-  checkUnique: propTypes.func.isRequired,
-  onAdd: propTypes.func.isRequired,
-};
 
 export default ContactForm;
